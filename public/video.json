@@ -1,0 +1,15 @@
+[
+    {
+      "id": 1,
+      "title": "Sample Video 1",
+      "thumbnail": "/thumbnail1.png",
+      "videoPath": "videos/sample-video-1.mp4"
+    },
+    {
+      "id": 2,
+      "title": "Sample Video 2",
+      "thumbnail": "/thumbnail2.png",
+      "videoPath": "videos/sample-video-2.mp4"
+    }
+  ]
+  

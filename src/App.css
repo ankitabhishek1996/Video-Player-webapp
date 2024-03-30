@@ -1,38 +1,213 @@
-.App {
-  text-align: center;
+/* Include Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+body {
   color: white;
+  background-color: #141414; /* Netflix dark background */
+  min-height: 100%;
+  position: relative; /* For footer positioning */
+  padding-bottom: 60px; /* Footer height */
+}
+.app {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: white;
+  background-color: #141414;
+  min-height: 100%;
+  padding-bottom: 50px; /* Adjusted for footer */
 }
 
-.App-link {
-  color: #61dafb;
+/* Navbar Styling */
+.navbar {
+  background-color: #181818; /* Darker tone for navbar */
+  color: #fff;
+  padding: 10px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  position: fixed;
+  width: 100%;
+  z-index: 1001;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.navbar h1 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+/* Video List Styling */
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 80px 50px 0; /* Increased top padding for fixed navbar */
+}
+
+.video-thumbnail {
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease;
+  border-radius: 4px;
+}
+
+.video-thumbnail::after {
+  content: '';
+  display: block;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.video-thumbnail img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.video-thumbnail:hover {
+  transform: scale(1.05);
+  z-index: 100;
+}
+
+.video-thumbnail:hover .play-icon {
+  opacity: 1;
+}
+
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 3rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #181818;
+  color: #999;
+  text-align: center;
+  padding: 15px 50px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Additional Media Queries */
+@media (max-width: 600px) {
+  .navbar {
+    padding: 10px 20px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .navbar h1 {
+    font-size: 1.5rem;
   }
+  
+  .video-list {
+    padding: 60px 20px 0;
+  }
+  
+  .footer {
+    padding: 10px 20px;
+  }
+}
+
+/* Video Player Overlay */
+.video-player-overlay {
+  position: fixed; /* Fixed position to cover the entire viewport */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  z-index: 2000; /* Higher index so it's above everything else */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* To ensure some padding around the video player */
+}
+
+/* Video Player Box */
+.video-player {
+  position: relative; /* Relative so we can position the close button absolutely */
+  width: 80vw; /* Responsive width based on the viewport width */
+  max-width: 800px; /* Maximum width for the player */
+}
+
+/* Video Element */
+.video-player video {
+  width: 100%; /* Video takes the full width of the player */
+  max-height: 80vh; /* Maximum height of the video player */
+  border-radius: 8px; /* Rounded corners for aesthetics */
+}
+
+/* Close Button */
+.video-player .close-btn {
+  position: absolute;
+  top: -40px; /* Position it above the player */
+  right: 0;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px; /* Larger close button */
+  cursor: pointer;
+  z-index: 2001; /* Above the overlay */
+}
+
+.video-player .close-btn:hover {
+  color: #e50914; /* Netflix red for hover state */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .video-player {
+    width: 90vw; /* Increase width for smaller screens */
+  }
+
+  .video-player video {
+    max-height: 60vh; /* Decrease max height for smaller screens */
+  }
+}
+/* New Video Form Styles */
+form {
+  max-width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #333;
+  border-radius: 4px;
+}
+
+form input {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #e50914;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #f6121d;
 }
